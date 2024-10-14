@@ -28,6 +28,21 @@
                     <h3 class="text-lg font-semibold">Track Your Debts</h3>
                 </div>
 
+                <!-- Filter Form -->
+                <form method="GET" action="{{ route('debt') }}" class="mb-4">
+                    <div class="form-group">
+                        <label for="status">Filter by Status:</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="">All</option>
+                            <option value="Pending" {{ request('status') === 'Pending' ? 'selected' : '' }}>Pending
+                            </option>
+                            <option value="Finished" {{ request('status') === 'Finished' ? 'selected' : '' }}>Finished
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                </form>
+
                 <!-- Navigation Buttons -->
                 <a href="{{ route('debtsinput') }}" class="btn btn-success mb-4" style="margin-right: 5px">Input
                     Debts</a>
@@ -40,12 +55,10 @@
                 @if ($debts->isEmpty())
                     <p class="text-gray-600">No debts created.</p>
                 @else
-
-                            <!-- Table to Display All Goals -->
                             <table class="table table-striped text-center table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">No</th> <!-- New column for No -->
+                                        <th scope="col">No</th>
                                         <th scope="col">Creditor</th>
                                         <th scope="col">Total Debt Amount (RM)</th>
                                         <th scope="col">Total Paid Amount (RM)</th>
@@ -56,23 +69,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php    $index = 1; @endphp <!-- Initialize index -->
+                                    @php    $index = 1; @endphp
                                     @foreach ($debts as $debt)
                                                         @php
-                                                            // Calculate paid amount as total amount minus remaining amount
                                                             $paidAmount = $debt->total_amount - $debt->remaining_amount;
-
-                                                            // Determine the status based on remaining_amount
                                                             $status = $debt->remaining_amount == 0 ? 'Finished' : 'Pending';
                                                         @endphp
                                                         <tr>
-                                                            <td>{{ $index++ }}</td> <!-- Display index and increment -->
+                                                            <td>{{ $index++ }}</td>
                                                             <td>{{ $debt->creditor_name }}</td>
                                                             <td>{{ number_format($debt->total_amount, 2) }}</td>
-                                                            <td>{{ number_format($paidAmount, 2) }}</td> <!-- Use the calculated paid amount -->
+                                                            <td>{{ number_format($paidAmount, 2) }}</td>
                                                             <td>{{ number_format($debt->remaining_amount, 2) }}</td>
                                                             <td>{{ Carbon::parse($debt->due_date)->format('Y-m-d') }}</td>
-                                                            <td>{{ $status }}</td> <!-- New column for status -->
+                                                            <td style="color: {{ $status === 'Finished' ? 'green' : 'red' }};">
+                                                                {{ $status }}
+                                                            </td>
                                                             <td>
                                                                 <a href="{{ url('/debt/addamountpaid', $debt->id) }}"
                                                                     class="btn btn-info mb-4 text-white">Enter Amount Paid</a>
