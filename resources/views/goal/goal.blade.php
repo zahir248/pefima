@@ -32,6 +32,15 @@
                     <p class="text-gray-600">No savings goals created.</p>
                 @else
                     <!-- Table to Display All Goals -->
+                    <div class="mb-4">
+                        <label for="progressFilter" class="font-semibold">Filter by Progress:</label>
+                        <select id="progressFilter" class="form-select" onchange="filterGoals()">
+                            <option value="">All</option>
+                            <option value="pending">Pending</option>
+                            <option value="finished">Finished</option>
+                        </select>
+                    </div>
+
                     <table class="table table-striped text-center table-bordered">
                         <thead class="thead-dark">
                             <tr>
@@ -45,18 +54,17 @@
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="goalsTable">
                             @foreach ($goals as $index => $goal)
-                                <tr>
+                                <tr data-progress="{{ $goal->progress() < 100 ? 'pending' : 'finished' }}">
                                     <td class="border border-gray-300 px-4 py-2">{{ $index + 1 }}</td>
                                     <td>{{ $goal->name }}</td>
                                     <td>{{ number_format($goal->target_amount, 2) }}</td>
                                     <td>{{ number_format($goal->current_amount, 2) }}</td>
                                     <td>{{ Carbon\Carbon::parse($goal->start_date)->format('Y-m-d') }}</td>
                                     <td>{{ Carbon\Carbon::parse($goal->end_date)->format('Y-m-d') }}</td>
-                                    <td
-                                        style="color: {{ $goal->progress() < 50 ? 'red' : ($goal->progress() < 100 ? 'orange' : 'green') }};">
-                                        {{ number_format($goal->progress(), 2) }}%
+                                    <td style="color: {{ $goal->progress() < 100 ? 'red' : 'green' }};">
+                                        {{ $goal->progress() < 100 ? 'Pending' : 'Finished' }}
                                     </td>
                                     <td>
                                         <a href="{{ url('/goal/editcurrentamount', $goal->id) }}"
@@ -68,6 +76,7 @@
                             @endforeach
                         </tbody>
                     </table>
+
                 @endif
 
                 <!-- Confirmation Modal -->
@@ -107,5 +116,22 @@
             document.getElementById('confirmationModal').classList.add('hidden');
         }
     </script>
+
+    <script>
+        function filterGoals() {
+            const filterValue = document.getElementById('progressFilter').value;
+            const rows = document.querySelectorAll('#goalsTable tr');
+
+            rows.forEach(row => {
+                const progress = row.getAttribute('data-progress');
+                if (filterValue === '' || progress === filterValue) {
+                    row.style.display = ''; // Show the row
+                } else {
+                    row.style.display = 'none'; // Hide the row
+                }
+            });
+        }
+    </script>
+
 
 </x-app-layout>

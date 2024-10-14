@@ -23,16 +23,30 @@ class DebtController extends Controller
 {
     ///////////////////////////// view ///////////////////
 
-    public function debt()
+    public function debt(Request $request)
     {
-
         $userId = auth()->id(); // Get the currently authenticated user's ID
 
+        // Start with a base query for debts
+        $query = Debt::where('user_id', $userId);
 
-        $debts = Debt::where('user_id', $userId)->get(); // Fetch goals for the logged-in user
+        // Check for status filter
+        if ($request->has('status') && $request->status !== '') {
+            if ($request->status === 'Finished') {
+                $query->where('remaining_amount', 0); // Only finished debts
+            } elseif ($request->status === 'Pending') {
+                $query->where('remaining_amount', '>', 0); // Only pending debts
+            }
+            // If status is "All", we do not modify the query, it will return all debts.
+        }
 
+        // Execute the query to get the debts
+        $debts = $query->get();
+
+        // Return the view with the filtered debts
         return view('debt.debt', compact('debts'));
     }
+
 
     public function debtsinput()
     {
