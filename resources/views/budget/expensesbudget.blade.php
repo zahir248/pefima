@@ -66,7 +66,7 @@
                                         <!-- Button to Set Budget -->
                                         <a href="{{ url('/budget/setbudget', $category->id) }}"
                                             class="bg-blue-500 hover:bg bg-primary text-white font-bold py-2 px-4 rounded"
-                                            style="margin-right: 10px; text-decoration: none;">
+                                            style="margin-right: 5px; text-decoration: none;">
                                             Set Budget
                                         </a>
                                         <!-- Button to Set Budget -->
@@ -77,7 +77,7 @@
                                         </a>
                                         <a href="{{ url('/budget/editcategory', $category->id) }}"
                                             class="bg-blue-500 hover:bg bg-warning text-white font-bold py-2 px-4 rounded"
-                                            style="margin-left: 10px; text-decoration: none;">
+                                            style="margin-left: 5px; margin-right: 5px;text-decoration: none;">
                                             Edit
                                         </a>
                                         <form action="{{ url('deletecategory', $category->id) }}" method="POST"
@@ -89,7 +89,7 @@
                                             <!-- Delete Button -->
                                             <button type="button"
                                                 class="bg-blue-500 hover:bg-danger text-white font-bold py-2 px-4 rounded"
-                                                style="margin-left: 10px; text-decoration: none;" data-bs-toggle="modal"
+                                                style="text-decoration: none;" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal"
                                                 onclick="setDeleteAction('{{ url('deletecategory', $category->id) }}')">
                                                 Delete
