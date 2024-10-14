@@ -24,5 +24,14 @@ class SavingsGoal extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
+    public function progress()
+    {
+        if ($this->target_amount == 0) {
+            return 0; // Avoid division by zero
+        }
+
+        return ($this->current_amount / $this->target_amount) * 100;
+    }
+
 }

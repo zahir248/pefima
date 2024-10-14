@@ -4,9 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\DebtController;
 
-
-Route::get('/', function () {
+Route::get('/pefima', function () {
     return view('welcome');
 });
 
@@ -20,66 +22,96 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-// Budget
+////////////////////////// Budget /////////////////////////////////////
 
-Route::get('/budget', [HomeController::class, 'budget'])->name('budget');
+// view
 
-Route::get('/expensesinput', [HomeController::class, 'expensesinput'])->name('expensesinput');
+Route::get('/budget/budget', [BudgetController::class, 'budget'])->name('budget');
 
-route::post('/addexpenses',[HomeController::class,'addexpenses']);
+Route::get('/budget/expensesinput', [BudgetController::class, 'expensesinput'])->name('expensesinput');
 
-route::delete('deleteexpenses/{id}',[HomeController::class,'deleteexpenses']);
+Route::get('/budget/setbudget/{id}', [BudgetController::class, 'setbudget'])->name('setbudget');
 
-route::get('updateexpense/{id}',[HomeController::class,'updateexpense']);
+Route::get('/budget/expensesbudget', [BudgetController::class, 'expensesbudget'])->name('expensesbudget');
 
-route::post('updateexpensefunc/{id}',[HomeController::class,'updateexpensefunc']);
+Route::get('/budget/showexpenses/{id}', [BudgetController::class, 'showexpenses'])->name('showexpenses');
 
-Route::get('/expensesbudget', [HomeController::class, 'expensesbudget'])->name('expensesbudget');
+Route::get('/budget/editcategory/{id}', [BudgetController::class, 'editcategory'])->name('editcategory');
 
-Route::get('/setbudget/{id}', [HomeController::class, 'setbudget'])->name('setbudget');
+Route::get('/budget/addcategory', [BudgetController::class, 'addcategory'])->name('addcategory');
 
-route::post('/adjustbudget/{id}',[HomeController::class,'adjustbudget'])->name('adjustbudget');
+route::get('/budget/updateexpense/{id}', [BudgetController::class, 'updateexpense']);
 
-Route::get('/showexpenses/{id}', [HomeController::class, 'showexpenses'])->name('showexpenses');
+Route::get('/budget/importexcel', [BudgetController::class, 'importexcel'])->name('importexcel');
 
-Route::get('/downloadpdf/{id}', [HomeController::class, 'downloadpdf'])->name('downloadpdf');
+Route::get('/budget/downloadpdf/{id}', [BudgetController::class, 'downloadpdf'])->name('downloadpdf');
 
-Route::get('/importexcel', [HomeController::class, 'importexcel'])->name('importexcel');
+// function
 
-Route::post('uploadexcel', [HomeController::class, 'uploadexcel'])->name('uploadexcel');
+route::post('/addexpenses', [BudgetController::class, 'addexpenses']);
 
-Route::get('/addcategory', [HomeController::class, 'addcategory'])->name('addcategory');
+route::delete('/deleteexpenses/{id}', [BudgetController::class, 'deleteexpenses']);
 
-route::post('/insertcategory',[HomeController::class,'insertcategory']);
+route::post('/updateexpensefunc/{id}', [BudgetController::class, 'updateexpensefunc']);
 
-route::delete('deletecategory/{id}',[HomeController::class,'deletecategory']);
+route::post('/adjustbudget/{id}', [BudgetController::class, 'adjustbudget'])->name('adjustbudget');
 
-// Goal
+Route::post('/uploadexcel', [BudgetController::class, 'uploadexcel'])->name('uploadexcel');
 
-Route::get('/goal', [HomeController::class, 'goal'])->name('goal');
+route::post('/insertcategory', [BudgetController::class, 'insertcategory']);
 
-Route::get('/goalsinput', [HomeController::class, 'goalsinput'])->name('goalsinput');
+route::delete('/deletecategory/{id}', [BudgetController::class, 'deletecategory']);
 
-route::post('/addgoals',[HomeController::class,'addgoals']);
+route::post('/updatecategory/{id}', [BudgetController::class, 'updatecategory']);
 
-route::delete('deletegoals/{id}',[HomeController::class,'deletegoals']);
+////////////////////////// Goal /////////////////////////////////////
 
-Route::get('/editgoal/{id}', [HomeController::class, 'editgoal'])->name('editgoal');
+// view
 
-route::post('updategoal/{id}',[HomeController::class,'updategoal']);
+Route::get('/goal/goal', [GoalController::class, 'goal'])->name('goal');
 
-Route::get('/editcurrentamount/{id}', [HomeController::class, 'editcurrentamount'])->name('editcurrentamount');
+Route::get('/goal/goalsinput', [GoalController::class, 'goalsinput'])->name('goalsinput');
 
-route::post('updatecurrentamount/{id}',[HomeController::class,'updatecurrentamount']);
+Route::get('/goal/editcurrentamount/{id}', [GoalController::class, 'editcurrentamount'])->name('editcurrentamount');
 
+Route::get('/goal/editgoal/{id}', [GoalController::class, 'editgoal'])->name('editgoal');
 
+// function
 
+route::post('/addgoals', [GoalController::class, 'addgoals']);
 
+route::delete('/deletegoals/{id}', [GoalController::class, 'deletegoals']);
 
+route::post('/updategoal/{id}', [GoalController::class, 'updategoal']);
 
+route::post('/updatecurrentamount/{id}', [GoalController::class, 'updatecurrentamount']);
 
+////////////////////////// Debt /////////////////////////////////////
 
+// view
 
+Route::get('/debt/debt', [DebtController::class, 'debt'])->name('debt');
 
+Route::get('/debt/debtsinput', [DebtController::class, 'debtsinput'])->name('debtsinput');
+
+Route::get('/debt/addamountpaid/{id}', [DebtController::class, 'addamountpaid'])->name('addamountpaid');
+
+Route::get('/debt/editdebt/{id}', [DebtController::class, 'editdebt'])->name('editdebt');
+
+Route::get('/debt/downloadreport', [DebtController::class, 'downloadreport'])->name('downloadreport');
+
+// function
+
+route::post('/adddebts', [DebtController::class, 'adddebts']);
+
+route::post('/insertamountpaid/{id}', [DebtController::class, 'insertamountpaid']);
+
+route::post('/updatedebts/{id}', [DebtController::class, 'updatedebts']);
+
+route::delete('/deletedebts/{id}', [DebtController::class, 'deletedebts']);
+
+/////////////////////////////////////////////////////////////////////
+
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');

@@ -15,7 +15,7 @@ class ExpensesImport implements ToModel
     public function model(array $row)
     {
         Log::info('Row data:', $row); // Log each row data
-        
+
         if (empty($row[0]) || empty($row[1]) || empty($row[2]) || empty($row[3])) {
             Log::warning('Incomplete row data, skipping row:', $row);
             return null; // Skip rows that do not have enough data

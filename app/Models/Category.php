@@ -11,6 +11,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'user_id',
         'budget',
     ];
 
@@ -37,5 +38,10 @@ class Category extends Model
     public function expenses()
     {
         return $this->hasMany(Budget::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
