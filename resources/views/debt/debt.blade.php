@@ -28,6 +28,15 @@
                     <h3 class="text-lg font-semibold">Track Your Debts</h3>
                 </div>
 
+                <!-- Navigation Buttons -->
+                <a href="{{ route('debtsinput') }}" class="btn btn-success mb-4" style="margin-right: 5px">Input
+                    Debts</a>
+
+                <!-- Button to download pdf -->
+                <a href="{{ route('downloadreport') }}" class="btn btn-warning mb-4 text-white">
+                    Download Report (PDF)
+                </a>
+
                 <!-- Filter Form -->
                 <form method="GET" action="{{ route('debt') }}" class="mb-4">
                     <div class="form-group">
@@ -42,15 +51,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Filter</button>
                 </form>
-
-                <!-- Navigation Buttons -->
-                <a href="{{ route('debtsinput') }}" class="btn btn-success mb-4" style="margin-right: 5px">Input
-                    Debts</a>
-
-                <!-- Button to download pdf -->
-                <a href="{{ route('downloadreport') }}" class="btn btn-warning mb-4 text-white">
-                    Download Report (PDF)
-                </a>
 
                 @if ($debts->isEmpty())
                     <p class="text-gray-600">No debts created.</p>
