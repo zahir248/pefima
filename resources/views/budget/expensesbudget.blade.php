@@ -62,34 +62,30 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="border border-gray-300 px-4 py-2">
+                                    <td >
                                         <!-- Button to Set Budget -->
                                         <a href="{{ url('/budget/setbudget', $category->id) }}"
-                                            class="bg-blue-500 hover:bg bg-primary text-white font-bold py-2 px-4 rounded"
-                                            style="margin-right: 5px; text-decoration: none;">
+                                            class="btn btn-primary mb-4">
                                             Set Budget
                                         </a>
                                         <!-- Button to Set Budget -->
                                         <a href="{{ url('/budget/showexpenses', $category->id) }}"
-                                            class="bg-blue-500 hover:bg bg-info text-white font-bold py-2 px-4 rounded"
-                                            style="text-decoration: none;">
+                                        class="btn btn-info mb-4 text-white">
                                             View Expenses
                                         </a>
                                         <a href="{{ url('/budget/editcategory', $category->id) }}"
-                                            class="bg-blue-500 hover:bg bg-warning text-white font-bold py-2 px-4 rounded"
-                                            style="margin-left: 5px; margin-right: 5px;text-decoration: none;">
+                                            class="btn btn-warning mb-4 text-white">
                                             Edit
                                         </a>
                                         <form action="{{ url('deletecategory', $category->id) }}" method="POST"
                                             style="display:inline"
-                                            class="bg-blue-500 hover:bg bg-danger text-white font-bold py-2 px-4 rounded"
                                             onsubmit="return confirm('Are you sure you want to delete this category?');">
                                             @csrf
                                             @method('DELETE') <!-- This is necessary to specify the DELETE method -->
                                             <!-- Delete Button -->
                                             <button type="button"
-                                                class="bg-blue-500 hover:bg-danger text-white font-bold py-2 px-4 rounded"
-                                                style="text-decoration: none;" data-bs-toggle="modal"
+                                                class="btn btn-danger mb-4"
+                                                data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal"
                                                 onclick="setDeleteAction('{{ url('deletecategory', $category->id) }}')">
                                                 Delete

@@ -43,16 +43,17 @@
                             </select>
                         </div>
 
-                        <div class="w-1/4" style="margin-top: 25px; margin-left: 10px;">
-                            <button type="submit" class="btn btn-primary py-2 px-4">Filter</button>
+                        <div class="w-1/4" style="margin-top: 50px; margin-left: 10px;">
+                            <button type="submit" class="btn btn-primary mb-4">Filter</button>
                         </div>
 
-                        <!-- Button to download pdf -->
-                        <a href="{{ route('downloadpdf', $category->id) }}"
-                            class="bg-blue-500 hover:bg bg-info text-white font-bold py-2 px-4 rounded"
-                            style="margin-top: 25px ;margin-left: 520px">
-                            Download Report (PDF)
-                        </a>
+                        <div class="w-1/4" style="margin-top: 50px; margin-left: 10px">
+                            <!-- Button to download pdf -->
+                            <a href="{{ route('downloadpdf', $category->id) }}"
+                                class="btn btn-info mb-4">
+                                Download Report
+                            </a>
+                        </div>
 
                     </div>
                 </form>

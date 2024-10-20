@@ -90,9 +90,8 @@
                                     <td>{{ $expense->amount }}</td>
                                     <td>{{ $expense->date }}</td>
                                     <td>
-                                        <a href="{{ url('/budget/updateexpense', $expense->id) }}" class="btn btn-primary"
-                                            style="margin-right: 5px">Edit</a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        <a href="{{ url('/budget/updateexpense', $expense->id) }}" class="btn btn-primary mb-4">Edit</a>
+                                        <button type="button" class="btn btn-danger mb-4" data-bs-toggle="modal"
                                             data-bs-target="#deleteModal" data-expense-id="{{ $expense->id }}">
                                             Delete
                                         </button>
