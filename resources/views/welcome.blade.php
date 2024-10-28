@@ -154,10 +154,10 @@
 
     <div class="container mt-5 content">
         <!-- Content Section -->
-        <div style="background-color: grey;">
+        <div style="background-color: white">
             <div class="card-body text-center">
-                <h2 class="card-title text-white">Personal Finance Management System</h2>
-                <p class="card-text text-white">Manage your finances efficiently with our system designed for budget
+                <h2 class="card-title text-black">Personal Finance Management System</h2>
+                <p class="card-text text-black">Manage your finances efficiently with our system designed for budget
                     tracking, savings goals, and debt management.</p>
 
                 <!-- Grid Layout for Features -->
